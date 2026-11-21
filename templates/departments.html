@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+{% block title %}Departments| EMS{% endblock %}
+{% block content %}
+<div class="page-heading">
+  <div>
+    <h1>Departments</h1>
+    <p class="muted">Manage department records</p>
+  </div>
+</div>
+<section class="panel">
+  <div class="panel-title-row">
+    <h2>Department Registration</h2>
+  </div>
+  <br>
+  <div class="p-4">
+    <form method="POST" action="{{ url_for('departments') }}">
+      <div class="mb-3">
+        <label for="department_id" class="form-label">
+          Department ID:
+        </label>
+        <input type="text" id="department_id" name="department_id" class="form-control" required>
+      </div>
+
+      <div class="mb-3">
+        <label for="name" class="form-label">
+          Name:
+        </label>
+        <input type="text" id="name" name="name" class="form-control" required>
+      </div>
+
+      <div class="mb-3">
+        <label for="manager" class="form-label">
+          Manager:
+        </label>
+        <input type="text" id="manager" name="manager" class="form-control" required>
+      </div>
+
+      <button class="btn btn-primary" type="submit">
+        + Add Department
+      </button>
+
+      <a href="{{ url_for('dashboard') }}" class="btn">
+        Cancel
+      </a>
+    </form>
+</section>
+<br>
+<section class="panelS">
+  <div class="toolbar"><input class="search-input" type="search" placeholder="Search departments…"
+      data-table-search="departmentsTable"><span class="muted">Department directory</span></div>
+  <div class="table-wrap">
+    <table id="departmentsTable">
+      <thead>
+        <tr>
+          <th>Department ID</th>
+          <th>Name</th>
+          <th>Manager</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for department in departments %}
+        <tr>
+          <td>{{ department.department_id }}</td>
+          <td>{{ department.name }}</td>
+          <td>{{ department.manager }}</td>
+          <td>
+            <button class="icon-btn">✎</button>
+            <button class="icon-btn">×</button>
+          </td>
+        </tr>
+        {% else %}
+        <tr>
+          <td colspan="4" class="empty-state">
+            No department records found.
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</section>
+{% endblock %}

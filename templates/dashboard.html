@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% block title %}Dashboard | EMS{% endblock %}
+{% block content %}
+<div class="page-heading">
+  <div>
+    <h1>Dashboard</h1>
+    <p class="muted">Employee Management System overview</p>
+  </div>
+</div>
+
+<section class="panel table-panel">
+  <div class="panel-title-row">
+    <h2>On vacation</h2><a class="text-link" href="{{ url_for('vacations') }}">View all →</a>
+  </div>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Employee ID</th>
+          <th>Name</th>
+          <th>Department</th>
+          <th>Start Date</th>
+          <th>End Date</th>
+          <th>Date Requested</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for vacation, department, name in vacations %}
+        <tr>
+          <td>{{ vacation.employee_id }}</td>
+          <td>{{ name or 'N/A' }}</td>
+          <td>{{ department or 'N/A' }}</td>
+          <td>{{ vacation.start_date }}</td>
+          <td>{{ vacation.end_date }}</td>
+          <td>{{ vacation.date_requested }}</td>
+        </tr>
+
+        {% else %}
+        <tr>
+          <td colspan="6">
+            No employees currently on vacation.
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<div class="stats-grid">
+  <article class="stat-card">
+    <div class="stat-card-head">Total Employees</div>
+    <div class="stat-number">{{ total_employees|default(0) }}</div>
+    <div class="stat-caption">Registered employees</div>
+  </article>
+  <article class="stat-card">
+    <div class="stat-card-head">Departments</div>
+    <div class="stat-number">{{ total_departments|default(0) }}</div>
+    <div class="stat-caption">Active departments</div>
+  </article>
+  <article class="stat-card">
+    <div class="stat-card-head">On Vacation</div>
+    <div class="stat-number">{{ vacation_count|default(0) }}</div>
+    <div class="stat-caption">Currently away</div>
+  </article>
+</div>
+{% endblock %}

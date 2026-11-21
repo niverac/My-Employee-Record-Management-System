@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block title %}Vacations | EMS{% endblock %}
+{% block content %}
+<div class="page-heading">
+  <div>
+    <h1>Vacations</h1>
+    <p class="muted">Track and manage employee leave</p>
+  </div>
+  <a href="{{ url_for('vacation_request') }}" class="btn btn-primary">+ New Request</a>
+</div>
+<section class="panel">
+  <div class="toolbar">
+    <input class="search-input" type="search" placeholder="Search vacation records…" data-table-search="vacationsTable">
+    <select class="filter-select">
+      <option>All statuses</option>
+      <option>Approved</option>
+      <option>Pending</option>
+      <option>Rejected</option>
+    </select>
+  </div>
+  <div class="table-wrap">
+    <table id="vacationsTable">
+      <thead>
+        <tr>
+          <th>Employee ID</th>
+          <th>Employee Name</th>
+          <th>Start Date</th>
+          <th>End Date</th>
+          <th>Date Requested</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+  <tbody>{% for vacation in vacations %}
+    <tr>
+      <td>{{ vacation.employee_id }}</td>
+      <td>{{ vacation.name }}</td>
+      <td>{{ vacation.start_date }}</td>
+      <td>{{ vacation.end_date }}</td>
+      <td>{{ vacation.date_requested }}</td>
+      <td><button class="icon-btn" data-demo-action="View vacation">⌕</button>
+      </td>
+    </tr>
+    {% else %}
+    <tr>
+      <td colspan="8" class="empty-state">No vacation records found.</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+</div>
+</section>
+{% endblock %}

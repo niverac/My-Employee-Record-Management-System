@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block title %}Users | EMS{% endblock %}
+{% block content %}
+<div class="page-heading"><div><h1>Users</h1><p class="muted">Manage system access and roles</p></div><button class="btn btn-primary" data-demo-action="Create user">＋ Add User</button></div>
+<section class="panel">
+  <div class="toolbar"><input class="search-input" type="search" placeholder="Search users…" data-table-search="usersTable"></div>
+  <div class="table-wrap"><table id="usersTable"><thead><tr><th>User ID</th><th>Username</th><th>Email</th><th>Role</th><th>Status</th><th>Last Login</th><th>Actions</th></tr></thead>
+  <tbody>{% for user in users %}<tr><td>{{ user.id }}</td><td>{{ user.username }}</td><td>{{ user.email }}</td><td>{{ user.role }}</td><td><span class="status status-active">{{ user.status }}</span></td><td>{{ user.last_login }}</td><td><button class="icon-btn" data-demo-action="Edit user">✎</button> <button class="icon-btn" data-demo-action="Disable user">⊘</button></td></tr>{% else %}<tr><td colspan="7" class="empty-state">No user accounts found.</td></tr>{% endfor %}</tbody></table></div>
+</section>
+{% endblock %}

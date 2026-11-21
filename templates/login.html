@@ -1,0 +1,16 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Login | EMS</title><link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"></head>
+<body class="login-page">
+  <main class="login-card">
+    <div class="login-brand"><span class="brand-icon">●</span><span>EMS</span></div>
+    <h1>Welcome back</h1><p class="muted">Sign in to your account</p>
+    {% if error %}<div class="alert alert-error">{{ error }}</div>{% endif %}
+    <form method="POST" action="{{ url_for('login') }}">
+      <label for="username">Username</label><input id="username" name="username" type="text" placeholder="Enter your username" autocomplete="username" required>
+      <label for="password">Password</label><input id="password" name="password" type="password" placeholder="Enter your password" autocomplete="current-password" required>
+      <div class="login-options"><label class="remember"><input type="checkbox" name="remember"> Remember me</label><a href="#" class="text-link">Forgot password?</a></div>
+      <button class="btn btn-primary btn-full" type="submit">Sign In</button>
+    </form>
+    <p class="login-foot">Employee Management System</p>
+  </main>
+</body></html>

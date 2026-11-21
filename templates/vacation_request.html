@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+
+{% block title %}Vacation Request | EMS{% endblock %}
+
+{% block content %}
+
+<div class="page-heading">
+  <div>
+    <h1>Vacation Request</h1>
+    <p class="muted">Submit a new vacation request</p>
+  </div>
+</div>
+
+<section class="panel">
+  <div class="panel-title-row">
+  </div>
+  <br>
+  <div class="p-4">
+    <form method="POST">
+       <div class="mb-3">
+        <label for="employee_id" class="form-label">
+          Employee ID:
+        </label>
+        <select id="employee_id" name="employee_id" class="form-select" required>
+          <option value="">Select Employee ID</option>
+          {% for employee in employees %}
+          <option value="{{ employee.employee_id }}" 
+          data-first-name="{{ employee.first_name }}" 
+          data-last-name="{{ employee.last_name }}">
+            {{ employee.employee_id }}
+          </option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="mb-3">
+        <label for="first_name" class="form-label">
+          First Name:
+        </label>
+        <input type="text" id="first_name" name="first_name" class="form-control" readonly>
+      </div>
+      <div class="mb-3">
+        <label for="last_name" class="form-label">
+          Last Name:
+        </label>
+        <input type="text" id="last_name" name="last_name" class="form-control" readonly>
+      </div>
+      <div class="vacation-dates">
+        <div class="start-date">
+          <label for="start_date" class="form-label">
+            Start Date:
+          </label>
+          <input type="date" id="start_date" name="start_date" class="form-control" required>
+        </div>
+        <div class="end-date">
+          <label for="end_date" class="form-label">
+            End Date:
+          </label>
+          <input type="date" id="end_date" name="end_date" class="form-control" required>
+        </div>
+        <div class="date-requested">
+          <label for="date_requested" class="form-label">
+            End Date:
+          </label>
+          <input type="date" id="date_requested"" name="date_requested"" class="form-control" required>
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="reason" class="form-label">
+          Reason:
+        </label>
+        <input type="text" id="reason" name="reason" class="form-control" required>
+      </div>
+      <button class="btn btn-primary" type="submit">
+        Register
+      </button>
+
+      <a href="{{ url_for('vacations') }}" class="btn">
+        Cancel
+      </a>
+
+    </form>
+  </div>
+</section>
+<script src="{{ url_for('static', filename='js/vacation.js') }}"></script>
+{% endblock %}

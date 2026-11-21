@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% block title %}Edit Employee | EMS{% endblock %}
+{% block content %}
+
+<div class="page-heading">
+    <div>
+        <h1>Edit Employee</h1>
+        <p class="muted">Update employee information</p>
+    </div>
+</div>
+
+<section class="panel">
+    <div class="panel-title-row">
+        <h2>Edit Employee Information</h2>
+    </div>
+    <br>
+    <div class="p-4">
+        <form method="POST">
+            <div class="mb-3">
+                <label for="employee_id" class="form-label">Employee ID:</label>
+                <input type="text" id="employee_id" name="employee_id" value="{{ employee.employee_id }}"
+                    class="form-control" readonly>
+            </div>
+            <div class="mb-3">
+                <label for="first_name" class="form-label">First Name:</label>
+                <input type="text" id="first_name" name="first_name" value="{{ employee.first_name }}"
+                    class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label for="last_name" class="form-label">Last Name:</label>
+                <input type="text" id="last_name" name="last_name" value="{{ employee.last_name }}" class="form-control"
+                    required>
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Email:</label>
+                <input type="email" id="email" name="email" value="{{ employee.email }}" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label for="department" class="form-label">Department:</label>
+                <select id="department" name="department" class="form-select" required>
+                    {% for department in departments %}
+                    <option value="{{ department.name }}" 
+                    {% if employee.department==department.name %} 
+                    selected 
+                    {%endif %}>
+                    {{ department.name }}
+                    </option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="address" class="form-label">Address:</label>
+                <input type="text" id="address" name="address" value="{{ employee.address }}" class="form-control">
+            </div>
+            <div class="mb-3">
+                <label for="mobile_number" class="form-label">Mobile Number:</label>
+                <input type="text" id="mobile_number" name="mobile_number" value="{{ employee.mobile_number }}" class="form-control">
+            </div>
+            <button class="btn btn-primary" type="submit">
+                Update Employee
+            </button>
+            <a href="{{ url_for('employees') }}" class="btn">
+                Cancel
+            </a>
+        </form>
+</section>
+
+{% endblock %}

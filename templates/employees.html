@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}Employees | EMS{% endblock %}
+{% block content %}
+<div class="page-heading"><div>
+  <h1>Employees</h1>
+  <p class="muted">Manage employee records</p>
+</div><a href="{{ url_for('register') }}" class="btn btn-primary">＋ Add Employee</a>
+</div>
+<section class="panel">
+  <div class="toolbar"><input class="search-input" type="search" placeholder="Search employees…" data-table-search="employeesTable"><span class="muted">Employee directory</span></div>
+  <div class="table-wrap"><table id="employeesTable"><thead><tr><th>Employee ID</th><th>Name</th><th>Department</th><th>Position</th><th>Email</th><th>Actions</th></tr></thead>
+  <tbody>{% for employee in employees %}
+    <tr>
+      <td>{{ employee.employee_id }}</td>
+      <td>{{ employee.name }}</td>
+      <td>{{ employee.department }}</td>
+      <td>{{ employee.position }}</td>
+      <td>{{ employee.email }}</td>
+      <td>
+        <a href="{{ url_for('edit_employee', employee_id=employee.employee_id) }}" class="icon-btn" title="Edit employee">✎</a> 
+        <button class="icon-btn" data-demo-action="Delete employee">×</button>
+      </td>
+    </tr>
+  {% else %}
+    <tr>
+      <td colspan="7" class="empty-state">No employee records found.</td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+</div>
+</section>
+{% endblock %}
